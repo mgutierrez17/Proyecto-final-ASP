@@ -1,3 +1,6 @@
+using Proyecto_final_ASP.Models;
+using Microsoft.EntityFrameworkCore;
+
 namespace Proyecto_final_ASP
 {
     public class Program
@@ -8,6 +11,9 @@ namespace Proyecto_final_ASP
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddSession();
+            string cadenaCon = builder.Configuration.GetConnectionString("MiConexion");
+            IServiceCollection serviceCollection = builder.Services.AddDbContext<SuperMercadoContext>(op => op.UseLazyLoadingProxies().UseSqlServer(cadenaCon));
 
             var app = builder.Build();
 
